@@ -39,7 +39,7 @@ Other Information
 -----------------
 
 The graph must be stored as a bi-directional graph with one vertex represented below in a 
-tab-delimited file stored on hdfs.  The columns required are node id and the edge list.  The edge list should be a comma-separated list of other nodes.
+tab-delimited file stored on hdfs.  The columns required are node id and the edge list.  The edge list should be a pipe delimited list of other nodes.
 
 For example...
 
