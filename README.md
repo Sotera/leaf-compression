@@ -24,7 +24,7 @@ These are instructions for building Giraph 1.0 against CDH 4.2.0.
 
 6. This will install giraph-core-1.0.0.jar in your local maven repository specifically usable for CDH 4.2.0
 
-7. You should now be able to build the leaf-compression by running mvn assembly:assembly This will create the executable jar in the target folder.
+7. Execute 'mvn assembly:assembly' to build the analytic.
 
 Example Run
 -----------
@@ -32,18 +32,18 @@ A small example is included to verify installation and the general concept.  It 
 
 To run, execute 'python Driver.py'
 
-The output is also stored on output/sorted_out.txt
+The output is stored on output/sorted_out.txt 
 
 
 Other Information
 -----------------
 
 The graph must be stored as a bi-directional graph with one vertex represented below in a 
-tab-delimited file stored on hdfs.  The columns required are node id and the edge list.  The edge list should be a pipe delimited list of other nodes.
+tab-delimited file stored on hdfs.  The columns required are node id and the edge list.  The edge list should be a comma delimited list of other nodes.
 
 For example...
 
-> 12345	1|2|9<br>
+> 12345	1,2,9<br>
 1	12345<br>
 2	12345<br>
 9	12345<br> 
@@ -53,6 +53,3 @@ In this case node 12345 has edges to nodes 1,2, and 9.  Remember that the data m
 The Driver.py script can also take in one argument, to change the number of Giraph Workers.  The number of Giraph workers is 1 LESS than the number of mappers your cluster will launch.  The default value for this analytic is 1.  
 
 This analytic will write data to and from hdfs.  The default directory is '/analytics/leaf-compression/' .  This value can be set by modifying Driver.py . 
-
-
-

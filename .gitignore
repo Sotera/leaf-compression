@@ -3,3 +3,4 @@
 output/
 target/
 .DS_Store
+.Trash*
