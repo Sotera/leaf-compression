@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>leaf-compression by Sotera</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>leaf-compression</h1>
+        <p></p>
+
+        <p class="view"><a href="https://github.com/Sotera/leaf-compression">View the Project on GitHub <small>Sotera/leaf-compression</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/Sotera/leaf-compression/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Sotera/leaf-compression/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Sotera/leaf-compression">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="distributed-leaf-compression" class="anchor" href="#distributed-leaf-compression"><span class="octicon octicon-link"></span></a>Distributed Leaf Compression</h1>
+
+<p>This project is a Giraph/Hadoop implementation of a leaf compression algorithm.  The leaf compression algorithm will remove any nodes from a Network Graph who only has one or zero edges.</p>
+
+<h2>
+<a name="build-instructions" class="anchor" href="#build-instructions"><span class="octicon octicon-link"></span></a>Build Instructions</h2>
+
+<p>Prior to building you must first download appache giraph and build a version for your cluster.<br>
+Then install the giraph-core-with-dependencies.jar into your local mvn repository.  Building Giraph and Leaf Compression require maven to be installed and executable on the command line.</p>
+
+<p>These are instructions for building Giraph 1.0 against CDH 4.2.0.</p>
+
+<ol>
+<li><p>Download Giraph (<a href="http://giraph.apache.org/">http://giraph.apache.org/</a>) -&gt; (<a href="http://www.apache.org/dyn/closer.cgi/giraph/giraph-1.0.0">http://www.apache.org/dyn/closer.cgi/giraph/giraph-1.0.0</a>)</p></li>
+<li><p>Extract.</p></li>
+<li><p>Find the hadoop_cdh4.1.2 profile within pom.xml and copy the entire section and paste below.</p></li>
+<li><p>Edit the new section changing instances of 4.1.2 to 4.2.0 within the section.</p></li>
+<li><p>From the command line at the top level type 'mvn -Phadoop_cdh4.2.0 -DskipTests clean install'</p></li>
+<li><p>This will install giraph-core-1.0.0.jar in your local maven repository specifically usable for CDH 4.2.0</p></li>
+<li><p>Execute 'mvn assembly:assembly' to build the analytic.</p></li>
+</ol><h2>
+<a name="example-run" class="anchor" href="#example-run"><span class="octicon octicon-link"></span></a>Example Run</h2>
+
+<p>A small example is included to verify installation and the general concept.  It is configured to run on your local machine hadoop cluster that has Apache Zookeeper installed and running.</p>
+
+<p>To run, execute 'python Driver.py'</p>
+
+<p>The output is stored on output/sorted_out.txt </p>
+
+<h2>
+<a name="other-information" class="anchor" href="#other-information"><span class="octicon octicon-link"></span></a>Other Information</h2>
+
+<p>The graph must be stored as a bi-directional graph with one vertex represented below in a 
+tab-delimited file stored on hdfs.  The columns required are node id and the edge list.  The edge list should be a comma delimited list of other nodes.</p>
+
+<p>For example...</p>
+
+<blockquote>
+<p>12345 1,2,9<br>
+1   12345<br>
+2   12345<br>
+9   12345<br></p>
+</blockquote>
+
+<p>In this case node 12345 has edges to nodes 1,2, and 9.  Remember that the data must be bi-directional.</p>
+
+<p>The Driver.py script can also take in one argument, to change the number of Giraph Workers.  The number of Giraph workers is 1 LESS than the number of mappers your cluster will launch.  The default value for this analytic is 1.  </p>
+
+<p>This analytic will write data to and from hdfs.  The default directory is '/analytics/leaf-compression/' .  This value can be set by modifying Driver.py . </p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Sotera">Sotera</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
